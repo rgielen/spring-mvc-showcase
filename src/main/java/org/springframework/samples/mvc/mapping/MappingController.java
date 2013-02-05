@@ -62,4 +62,9 @@ public class MappingController {
 		return new JavaBean();
 	}
 
+	@RequestMapping(value="/mapping/produces/negotiate", method=RequestMethod.GET)
+	public @ResponseBody JavaBean byProducesByNegotiation() {
+		return new JavaBean();
+	}
+
 }
