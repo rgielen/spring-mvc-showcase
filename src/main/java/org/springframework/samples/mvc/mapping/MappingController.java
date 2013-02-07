@@ -67,4 +67,10 @@ public class MappingController {
 		return new JavaBean();
 	}
 
+	@RequestMapping(value="/mapping/produces/complex", method=RequestMethod.GET)
+	public @ResponseBody
+	CustomMappingBean byProducesComplexBean() {
+		return new CustomMappingBean();
+	}
+
 }
