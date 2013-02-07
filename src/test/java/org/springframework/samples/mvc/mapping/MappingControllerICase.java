@@ -5,6 +5,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import org.junit.Test;
+import org.springframework.web.client.RestTemplate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -51,5 +52,21 @@ public class MappingControllerICase {
 		String json = response.getContentAsString();
 		assertEquals("{\"foo\":\"bar\",\"fruit\":\"apple\"}", json);
 		System.out.println(json);
+	}
+
+	@Test
+	public void testRestTemplateConsumesXML() throws Exception {
+		RestTemplate rest = new RestTemplate();
+		JavaBean bean = rest.getForObject(APP_URL_UNDER_TEST + "/mapping/produces/negotiate.xml",
+											JavaBean.class);
+		assertEquals("apple", bean.getFruit());
+	}
+
+	@Test
+	public void testRestTemplateConsumesJSON() throws Exception {
+		RestTemplate rest = new RestTemplate();
+		JavaBean bean = rest.getForObject(APP_URL_UNDER_TEST + "/mapping/produces/negotiate.json",
+										  JavaBean.class);
+		assertEquals("apple", bean.getFruit());
 	}
 }
